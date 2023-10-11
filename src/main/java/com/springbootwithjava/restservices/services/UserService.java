@@ -3,10 +3,13 @@ package com.springbootwithjava.restservices.services;
 
 //Service
 
+import com.springbootwithjava.restservices.ExceptionHandling;
 import com.springbootwithjava.restservices.UserRepository;
 import com.springbootwithjava.restservices.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,40 +32,57 @@ public class UserService {
 
     // CreateUser Method
 //Request body is User user
-    public User createUser(User user) {
+    public User createUser(User user) throws ExceptionHandling {
+        User existingUser=userRepository.findByUsername(user.getUsername());
+        if(existingUser!=null){
+            throw new ExceptionHandling("User already exists");
+        }
         return userRepository.save(user);
     }
 
     //getUserById
-    public Optional<User> getUserById(Long id) {
+    public Optional<User> getUserById(Long id) throws ExceptionHandling {
         Optional<User> user = userRepository.findById(id);
+        if(!user.isPresent()){
+            throw new ExceptionHandling("User Not Found In Data");
+        }
         return user;
     }
 
     //updateUserById method
     //In this method we are getting user and Id and then set  the id in persistant context
     //then the same user will be updated by the user body
-    public User updateUserById(Long id, User user) {
-        var userEntity = userRepository.findById(id).orElseThrow();
-        if (Objects.nonNull(userEntity)) {
-            userEntity.setFirstname(user.getFirstname());
+    public User updateUserById(Long id, User user)  throws ExceptionHandling{
+
+        Optional<User> userEntity = userRepository.findById(id);
+        if(!userEntity.isPresent()){
+            throw new ExceptionHandling(("User Not Found In Data, kindly provide correct id"));
+
         }
         //now we need to save this user then return it
-        return userRepository.save(userEntity);
+        return userRepository.save(user);
 
     }
     //deleteUserById method
 
     public void deleteUserById(Long id) {
-        if (userRepository.findById(id).isPresent()) {
+
+            Optional<User> userEntity = userRepository.findById(id);
+            if(!userEntity.isPresent()){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in the data,kindly provide correct id ");
+
+            }
+
+
+
             userRepository.deleteById(id);
-        }
+
 
 
     }
 
     //getUserByUsername
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }
