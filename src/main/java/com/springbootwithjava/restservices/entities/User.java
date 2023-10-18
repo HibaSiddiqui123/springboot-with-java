@@ -4,6 +4,11 @@ package com.springbootwithjava.restservices.entities;
 //Every instance of entity represents row in a DB
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 //schema distinguish one set of table with another
 //like we can define schema @Table(name="user", schema="user-management")
 //we are not using schema here because H2 DB is already using tested DB as it's schema name here
@@ -16,10 +21,12 @@ public class User {
     @GeneratedValue //For auto-generating values for id
 // ID is a primary key here
     private Long id;
-// we can also define length for the field or if it can be null or not or should it be unique in a table
+// we can also define length for the field or if  it can be null or not or should it be unique in a table
 //In relational DB we should define only one field as unique key but we can define more
-    @Column(name= "USER_NAME", length = 50, nullable = false, unique = true)
+    @NotBlank(message = "Name may not be null")
+//    @Column(name= "username", length = 50, nullable = false, unique = true)
     private String username;
+    @Size(min=2, message = "Firstname should have atleast two characters ")
     @Column(name= "FIRST_NAME", length = 50, nullable = false)
     private String firstname;
     @Column(name= "LAST_NAME", length = 50, nullable = false)

@@ -1,4 +1,4 @@
-package com.springbootwithjava.restservices;
+package com.springbootwithjava.restservices.exceptions;
 
 public class ExceptionHandling extends Exception {
 

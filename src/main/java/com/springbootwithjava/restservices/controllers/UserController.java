@@ -3,7 +3,7 @@ package com.springbootwithjava.restservices.controllers;
 
 //Controller
 
-import com.springbootwithjava.restservices.ExceptionHandling;
+import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
 import com.springbootwithjava.restservices.entities.User;
 import com.springbootwithjava.restservices.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 public class UserController {
@@ -35,7 +37,7 @@ public class UserController {
 
     @PostMapping("/users")
 
-    public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder){
+    public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder){
         try{
              userService.createUser(user);
             HttpHeaders headers = new HttpHeaders();

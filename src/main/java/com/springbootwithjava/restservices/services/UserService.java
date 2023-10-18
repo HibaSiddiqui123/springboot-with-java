@@ -3,7 +3,7 @@ package com.springbootwithjava.restservices.services;
 
 //Service
 
-import com.springbootwithjava.restservices.ExceptionHandling;
+import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
 import com.springbootwithjava.restservices.UserRepository;
 import com.springbootwithjava.restservices.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
