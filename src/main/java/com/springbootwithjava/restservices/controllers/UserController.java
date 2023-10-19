@@ -5,21 +5,25 @@ package com.springbootwithjava.restservices.controllers;
 
 import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
 import com.springbootwithjava.restservices.entities.User;
+import com.springbootwithjava.restservices.exceptions.UserNameNotFoundException;
 import com.springbootwithjava.restservices.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 
 @RestController
+@Validated
 public class UserController {
     //Autowired the user service
     @Autowired
@@ -59,12 +63,12 @@ public class UserController {
     //way 1: we can write method and then annotate it with get mapping
     //way 2: otherwise we can use same value of id in annotation and in method name
     @GetMapping("/users/{id}")
-    public Optional<User> getUserById(@PathVariable("id")Long id){
+    public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id){
         try {
             return  userService.getUserById(id);
 
         }catch(ExceptionHandling eh){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, eh.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, eh.getMessage());
         }
     }
     //updateUserById
@@ -87,8 +91,31 @@ public class UserController {
     @GetMapping("/users/byusername/{username}")
 
 
-    public User getUserByUsername(@PathVariable("username") String username){
-        return userService.getUserByUsername(username);
+    public User getUserByUsername(@PathVariable("username") String username)throws UserNameNotFoundException{
+
+        User user= userService.getUserByUsername(username);
+        if(user == null)
+            throw  new UserNameNotFoundException("Username : '"+username+"' not found in User repository");
+        return user;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

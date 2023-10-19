@@ -131,4 +131,4 @@ public class User {
     }
 }
 
-// In memory DB (Data will be lost when we restart JVM or when JVM reloads so we will prepopulate DB on runtime)
+// In memory DB (Data will be lost when we restart JVM or when JVM reloads so we will repopulate DB on runtime)
