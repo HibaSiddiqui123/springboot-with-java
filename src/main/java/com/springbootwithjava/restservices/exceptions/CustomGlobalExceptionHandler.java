@@ -8,9 +8,11 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 @ControllerAdvice
 
@@ -37,6 +39,33 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 ex.getMessage());
         return new ResponseEntity<>(customErrorDetails, HttpStatus.METHOD_NOT_ALLOWED);
     }
+
+    //UserNameNotFoundException
+
+    @ExceptionHandler(UserNameNotFoundException.class)
+    public final ResponseEntity<Object> handleUserNameNotFoundException(UserNameNotFoundException ex,WebRequest request){
+        CustomErrorDetails customErrorDetails = new CustomErrorDetails(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(true));
+
+        return new ResponseEntity<>(customErrorDetails, HttpStatus.NOT_FOUND);
+
+
+
+    }
+
+    //ConstraintViolationException
+
+   public final  ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException cv, WebRequest request){
+       CustomErrorDetails customErrorDetails = new CustomErrorDetails(
+               new Date(),
+               cv.getMessage(),
+               request.getDescription(true));
+
+       return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
+    }
+
 
 
 }
