@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 //schema distinguish one set of table with another
 //like we can define schema @Table(name="user", schema="user-management")
 //we are not using schema here because H2 DB is already using tested DB as it's schema name here
@@ -38,6 +39,9 @@ public class User {
 
     @Column(name= "SSN", length = 50, nullable = false, unique = true)
     private String ssn;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
 
 // Fields Constructor
@@ -114,8 +118,15 @@ public class User {
         this.ssn = ssn;
     }
 
-    //To String (optional required for bean logging)
+    public List<Order> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    //To String (optional required for bean logging)
 
     @Override
     public String toString() {

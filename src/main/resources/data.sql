@@ -2,3 +2,9 @@ insert into users values(101, 'hiba@yahoo.com', 'Hiba', 'Siddiqui', 'owner', 'ss
 insert into  users values(102, 'sohni@gmail.com', 'sohni', 'Siddiqui', 'co-owner', 'ssn102', 'sohni');
 insert into  users values(103, 'yahya@yopmail.com', 'yahya', 'Siddiqui', 'relative', 'ssn103', 'yahya');
 insert into  users values(104,  'adil@hotmailcom', 'adil', 'Siddiqui', 'worker', 'ssn104','adil');
+insert into orders values(2001,'order11',101);
+insert into orders values(2002,'order12',101);
+insert into orders values(2003,'order13',101);
+insert into orders values(2004,'order21',102);
+insert into orders values(2005,'order22',102);
+insert into orders values(2006,'order31',103);

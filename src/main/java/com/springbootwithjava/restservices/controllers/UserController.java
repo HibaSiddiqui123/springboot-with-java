@@ -24,13 +24,14 @@ import java.util.Optional;
 
 @RestController
 @Validated
+@RequestMapping(value="/users")
 public class UserController {
     //Autowired the user service
     @Autowired
     private UserService userService;
 
     //getAllUsers Method
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAllUsers(){
         return userService.getAllUsers();
 
@@ -39,7 +40,7 @@ public class UserController {
     //@RequestBody Annotation
     //@PostMapping Annotation
 
-    @PostMapping("/users")
+    @PostMapping
 
     public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder){
         try{
@@ -62,7 +63,7 @@ public class UserController {
     //path variable id will help to get user by id
     //way 1: we can write method and then annotate it with get mapping
     //way 2: otherwise we can use same value of id in annotation and in method name
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id){
         try {
             return  userService.getUserById(id);
@@ -72,7 +73,7 @@ public class UserController {
         }
     }
     //updateUserById
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public  User UpdateUserById(@PathVariable("id")Long id, @RequestBody User user){
         try{
             return  userService.updateUserById(id, user);
@@ -82,13 +83,13 @@ public class UserController {
     }
 
     //delete users
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable("id") Long id){
          userService.deleteUserById(id);
     }
 
     //getUserByUsername method
-    @GetMapping("/users/byusername/{username}")
+    @GetMapping("/byusername/{username}")
 
 
     public User getUserByUsername(@PathVariable("username") String username)throws UserNameNotFoundException{
