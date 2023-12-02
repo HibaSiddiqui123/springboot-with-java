@@ -3,11 +3,10 @@ package com.springbootwithjava.restservices.entities;
 //Entity == represents table store in a
 //Every instance of entity represents row in a DB
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
-import org.jetbrains.annotations.NotNull;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 //schema distinguish one set of table with another
@@ -20,27 +19,42 @@ public class User {
 //For telling JPA that it is our primary keys we need to annotate it with ID
     @Id
     @GeneratedValue //For auto-generating values for id
+
 // ID is a primary key here
+    @JsonView(Views.External.class)
     private Long id;
 // we can also define length for the field or if  it can be null or not or should it be unique in a table
 //In relational DB we should define only one field as unique key but we can define more
     @NotBlank(message = "Name may not be null")
 //    @Column(name= "username", length = 50, nullable = false, unique = true)
+    @JsonView(Views.External.class)
     private String username;
     @Size(min=2, message = "Firstname should have atleast two characters ")
     @Column(name= "FIRST_NAME", length = 50, nullable = false)
+    @JsonView(Views.External.class)
+
     private String firstname;
     @Column(name= "LAST_NAME", length = 50, nullable = false)
+    @JsonView(Views.External.class)
+
     private String lastname;
     @Column(name= "EMAIL_ADDRESS", length = 50, nullable = false)
+    @JsonView(Views.External.class)
+
     private String email;
     @Column(name= "ROLE", length = 50, nullable = false)
+    @JsonView(Views.Internal.class)
+
     private String role;
 
     @Column(name= "SSN", length = 50, nullable = false, unique = true)
+    @JsonView(Views.Internal.class)
+
     private String ssn;
 
     @OneToMany(mappedBy = "user")
+    @JsonView(Views.Internal.class)
+
     private List<Order> orders;
 
 
