@@ -56,10 +56,12 @@ public class User {
     @JsonView(Views.Internal.class)
 
     private List<Order> orders;
+    @Column(name = "ADDRESS")
+    private String address;
 
 
-// Fields Constructor
-    public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn) {
+    // Fields Constructor
+    public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn, String address) {
         this.id = id;
         this.username = username;
         this.firstname = firstname;
@@ -67,6 +69,8 @@ public class User {
         this.email = email;
         this.role = role;
         this.ssn = ssn;
+        this.address = address;
+
     }
 
     //No argument constructor
@@ -140,7 +144,15 @@ public class User {
         this.orders = orders;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     //To String (optional required for bean logging)
+
 
     @Override
     public String toString() {
@@ -152,6 +164,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 ", ssn='" + ssn + '\'' +
+                ", orders=" + orders +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
