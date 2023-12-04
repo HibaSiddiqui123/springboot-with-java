@@ -4,7 +4,7 @@ package com.springbootwithjava.restservices.services;
 //Service
 
 import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
-import com.springbootwithjava.restservices.UserRepository;
+import com.springbootwithjava.restservices.repositories.UserRepository;
 import com.springbootwithjava.restservices.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

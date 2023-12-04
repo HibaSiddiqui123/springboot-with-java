@@ -1,8 +1,8 @@
 package com.springbootwithjava.restservices.controllers;
 
 
-import com.springbootwithjava.restservices.OrderRepository;
-import com.springbootwithjava.restservices.UserRepository;
+import com.springbootwithjava.restservices.repositories.OrderRepository;
+import com.springbootwithjava.restservices.repositories.UserRepository;
 import com.springbootwithjava.restservices.entities.Order;
 import com.springbootwithjava.restservices.entities.User;
 import com.springbootwithjava.restservices.exceptions.UserNameNotFoundException;
