@@ -1,6 +1,6 @@
 package com.springbootwithjava.restservices.controllers;
 
-import com.springbootwithjava.restservices.UserRepository;
+import com.springbootwithjava.restservices.repositories.UserRepository;
 import com.springbootwithjava.restservices.dtos.UserMapstructDto;
 import com.springbootwithjava.restservices.entities.User;
 import com.springbootwithjava.restservices.mappers.UserMapper;

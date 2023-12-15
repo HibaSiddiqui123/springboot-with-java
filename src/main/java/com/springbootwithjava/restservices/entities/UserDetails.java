@@ -1,4 +1,4 @@
-package com.springbootwithjava.restservices;
+package com.springbootwithjava.restservices.entities;
 
 public class UserDetails {
     private String firstname;

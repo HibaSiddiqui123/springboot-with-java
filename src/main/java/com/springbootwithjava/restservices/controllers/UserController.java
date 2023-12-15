@@ -3,6 +3,7 @@ package com.springbootwithjava.restservices.controllers;
 
 //Controller
 
+import com.springbootwithjava.restservices.dtos.UserDtoV1;
 import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
 import com.springbootwithjava.restservices.entities.User;
 import com.springbootwithjava.restservices.exceptions.UserNameNotFoundException;
@@ -17,9 +18,10 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
+
 
 
 @RestController
@@ -32,7 +34,7 @@ public class UserController {
 
     //getAllUsers Method
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<UserDtoV1> getAllUsers(){
         return userService.getAllUsers();
 
     }

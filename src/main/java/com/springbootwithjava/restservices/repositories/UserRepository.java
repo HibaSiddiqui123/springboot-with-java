@@ -1,4 +1,4 @@
-package com.springbootwithjava.restservices;
+package com.springbootwithjava.restservices.repositories;
 
 import com.springbootwithjava.restservices.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

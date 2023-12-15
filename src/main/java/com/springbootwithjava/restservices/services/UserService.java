@@ -3,8 +3,9 @@ package com.springbootwithjava.restservices.services;
 
 //Service
 
+import com.springbootwithjava.restservices.dtos.UserDtoV1;
 import com.springbootwithjava.restservices.exceptions.ExceptionHandling;
-import com.springbootwithjava.restservices.UserRepository;
+import com.springbootwithjava.restservices.repositories.UserRepository;
 import com.springbootwithjava.restservices.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -24,8 +26,8 @@ public class UserService {
     //getAll users Method
     //return type is list and users will be returning
 //this method will call getAllUsers method from User Controller and then bring data from the database
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDtoV1> getAllUsers() {
+        return userRepository.findAll().stream().map(m -> new UserDtoV1(m.getId(),m.getUsername(),m.getFirstname(),m.getLastname(),m.getEmail(),m.getRole(),m.getSsn(),m.getOrders())).collect(Collectors.toList());
 
     }
 
