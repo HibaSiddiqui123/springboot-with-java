@@ -13,10 +13,12 @@ import java.util.List;
 //like we can define schema @Table(name="user", schema="user-management")
 //we are not using schema here because H2 DB is already using tested DB as it's schema name here
 
+
 @Entity
 @Table(name="users")
 public class User {
 //For telling JPA that it is our primary keys we need to annotate it with ID
+
     @Id
     @GeneratedValue //For auto-generating values for id
 
@@ -61,7 +63,7 @@ public class User {
 
 
     // Fields Constructor
-    public User(Long id, String username, String firstname, String lastname, String email, String role, String ssn, String address) {
+    public User(Long id) {
         this.id = id;
         this.username = username;
         this.firstname = firstname;
@@ -77,6 +79,15 @@ public class User {
    public User(){
 
 }
+
+    public User(long l, String johnDoe) {
+        this(l);
+        this.username = johnDoe;
+    }
+    public User(long l, String johnDoe, List<Order> orders) {
+        this(l,johnDoe);
+        this.orders=orders;
+    }
 // GETTER and SETTERS
 
 

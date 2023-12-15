@@ -9,6 +9,7 @@ import jakarta.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Objects;
 
 public class UserDtoV1 {
 
@@ -44,6 +45,11 @@ public class UserDtoV1 {
         this.role = role;
         this.ssn = ssn;
         this.orders = orders;
+    }
+
+    public UserDtoV1(long l, String johnDoe) {
+        this.id=l;
+        this.username=johnDoe;
     }
 
     public Long getId() {
@@ -108,5 +114,18 @@ public class UserDtoV1 {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDtoV1 userDtoV1 = (UserDtoV1) o;
+        return Objects.equals(id, userDtoV1.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
