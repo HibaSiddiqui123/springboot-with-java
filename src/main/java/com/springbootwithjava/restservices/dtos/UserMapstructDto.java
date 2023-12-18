@@ -14,6 +14,9 @@ public class UserMapstructDto {
         this.email = email;
     }
 
+    public UserMapstructDto(long l, String john) {
+    }
+
     public Long getUserid() {
         return userid;
     }
