@@ -20,4 +20,6 @@ public interface UserMapper {
 
     //LIST OF USERS TO LIST OF USERSMASPSTRUCTDTO
     List<UserMapstructDto> usersToUsersDtos(List<User> users);
+
+
 }
